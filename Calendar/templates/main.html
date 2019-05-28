@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+{% block body %}
+<head>
+	<title>Calendario</title>
+
+	<style type="text/css">
+		
+		.BotonDias{
+			width: 70px;
+		}
+
+		.TableCalendario,td,tr,th{
+			border: 1px solid;
+			color: green;
+			
+		}
+
+	</style>
+
+
+
+
+</head>
+<body>
+
+<h1>{{datos.mes}}/{{datos.anio}}</h1>
+
+<form action="{{url_for('procesarActividades',dia = datos.diaElegido)}}" method="POST">
+<table class="TableCalendario">
+	<tr>
+		<th>Lunes</th>
+		<th>Martes</th>
+		<th>Miercoles</th>
+		<th>Jueves</th>
+		<th>Viernes</th>
+		<th>Sabado</th>
+		<th>Domingo</th>
+	</tr>
+
+	{% for semana in datos.calendario %}
+	
+		<tr>
+			{% for dia in semana %}
+			
+				{% if  dia == 0 %}
+				
+					<td></td>
+				
+				{% else %}
+				
+					<td><input type="submit" class="BotonDias" name="boton" value="{{dia}}"></td>
+				
+				{% endif %}
+			
+			{% endfor %}	
+		</tr>
+	
+	{% endfor %}
+
+</table>
+<hr>
+{% if datos.presionoDia %}
+
+	{% if datos.hayActividades %}
+		Actividades:
+		<ul>
+			
+
+			{% for actividad in datos.actividades %}
+
+				<li>{{actividad}}</li>
+			{% endfor %}
+		</ul>
+
+	{% endif %}
+
+		<hr>
+
+	Agregar actividad el {{datos.diaElegido}}:
+
+	<input type="entry" name="crearActividad">
+	<input type="submit" name="boton" value="Enviar">
+{% endif %}
+</form>
+
+
+
+</body>
+{% endblock %}
+</html>

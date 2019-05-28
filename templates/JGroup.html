@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+	<h1>JOIN A GROUP!<h1>
+
+{% if msj.done == True  %}
+<!-- si se registra correctamente, saca un aviso, el script es para que se cierre lentamente el aviso.-->
+  <div class="alert success">
+    <span class="closebtn">&times;</span>  
+    <strong>HEY!</strong> YOU ARE NOW IN THAT GROUP CONGRATS!!!
+    <script>
+        var close = document.getElementsByClassName("closebtn");
+        var i;
+        for (i = 0; i < close.length; i++) {
+          close[i].onclick = function(){
+            var div = this.parentElement;
+            div.style.opacity = "0";
+            setTimeout(function(){ div.style.display = "none"; }, 600);
+          }
+        }
+    </script>
+  </div>
+{% endif %}
+<a href="{{ url_for('group') }}">
+	<i class="fas fa-arrow-circle-left fa-2x"></i>
+</a> 
+<div class="center">
+<fieldset>
+<table style="margin-left: 20px;"> 
+<!-- Table headers -->
+    <th> 
+        <tr style="color: green; ">      
+        	<td>GROUPS</td> 
+            <td></td> 
+            <td>#People</td>            
+ 		</tr> 
+    </th> 
+      
+<!-- For loop logic of jinja template -->
+{%for i in range(0, len)%} 
+  
+<!-- table rows -->
+<tr> 
+    <td>{{grupos[i]}}</td>
+    <td>
+    	<form action="{{ url_for('JGroup') }}" method="POST">
+    		<input type="hidden" name="njoin" id="njoin" value="{{grupos[i]}}">
+    		<button class="btn btn-success">JOIN!</button> 
+    	</form>
+    </td>
+    <td>
+        {{lengroups[i]}}
+    </td> 
+  
+{%endfor%} 
+  
+</tr> 
+  
+</table> 
+</fieldset>
+</div>
+
+{% endblock %}
