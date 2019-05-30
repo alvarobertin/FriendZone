@@ -231,15 +231,10 @@ def preferences():
     return render_template('preferences.html')
 
 
-@app.route("/home")
+
+@app.route("/home", methods=['GET', 'POST'])
 @is_logged_in
 def index():
-    return render_template('index.html')
-
-
-@app.route("/group", methods=['GET', 'POST'])
-@is_logged_in
-def group():
 
 
     msj = {'done': ''}
@@ -364,7 +359,7 @@ def see(name,diaa):
  
     else:
         print("No está")
-        return redirect(url_for('group'))
+        return redirect(url_for('index'))
 
     
 
@@ -423,7 +418,7 @@ def NewGroup():
         done = True
         msj = {'done': done}
         archivo.close()
-        return redirect(url_for('group'))
+        return redirect(url_for('index'))
 
     return render_template('NewGroup.html', msj=msj)
 

@@ -35,7 +35,7 @@
 		<tr> 
 		    <td><a href="{{url_for('see',name=grupos[i],diaa=0)}}">{{grupos[i]}}</a></td>
 		    <td>
-		    	<form action="{{ url_for('group') }}" method="POST">
+		    	<form action="{{ url_for('index') }}" method="POST">
 		    		<input type="hidden" name="njoin" id="njoin" value="{{grupos[i]}}">
 		    		<button class="btn btn-danger" onclick="return confirm('Are you sure?')">leave</button>
 		    	</form>
